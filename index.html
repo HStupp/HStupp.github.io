@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/calculator.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/freelancer.css" rel="stylesheet">
 
@@ -310,13 +310,13 @@
                             <hr class="star-primary">
                             <img src="img/portfolio/web design.png" class="img-responsive img-centered" alt="">
                             <p>I am proficient at using HTML5 and CSS3 to create a modern, elegant and responsive web design that will work on any size screen.  I achieve this in an efficient way by designing anything with the smallest possible screen first.  Making a design scale up from a stable mobile version is a lot easier than doing the inverse.  The other way I achieve efficiency is by using libraries where I can.  I started my career using Foundation, this project got me familiar with Bootstrap so I am comfortable using either!</p>
-                           
-                                
+
+
                                 Date:
                                     <strong>June 2016
                                     </strong>
-                                
-                                
+
+
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                         </div>
                     </div>
@@ -340,7 +340,7 @@
                             <hr class="star-primary">
                             <img src="img/portfolio/JavaScript.png" class="img-responsive img-centered" alt="">
                             <p>I have used JavaScript to accomplish programming and styling tasks which need to be client side in order to be possible, effective, performant or otherwise simpler.  This language is very powerful and many of the libraries written in JavaScript enable efficiency and effectiveness.  Personally I like using jQuery and Angular.js.  </p>
-                                
+
                                Date:
                                     <strong>June 2016
                                     </strong>
@@ -368,10 +368,10 @@
                             <hr class="star-primary">
                             <img src="img/portfolio/program.png" class="img-responsive img-centered" alt="">
                             <p> I started programming at a very young age but did not know it! in my pre-teens and early teens my 2 brothers and I played a game called WarCraft III, I became bored with the gameplay quickly, but discovered the world editor and its programming language, JASS.  I set out turning simple Orcs with Axes into a complicated modern warfare scenario.  Here I learned the principles of Object Oriented.  Later when I was exposed to real world applications, everything came very easily.  Since then I have become very good at writing C#, Python, VBA (for Excel) and even learned Ruby and Java. </p>
-                            
+
                                 Date:
                                     <strong>June 2016
-                                
+
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
                             Date:
                                     <strong>June 2016
                                     </strong>
-                                
+
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                         </div>
                     </div>
@@ -425,7 +425,7 @@
                             Date:
                                     <strong>June 2016
                                     </strong>
-                               
+
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                         </div>
                     </div>
@@ -445,15 +445,84 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Financial Modelling and Analysis</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/leedsfinance.png" class="img-responsive img-centered" alt="">
-                            <p> I graduated in May of 2015 at University of Colorado at Boulder: Leeds School of Business with an emphasis in Finance.  My Finance GPA was 4.0. In school I learned simple NPV valuation models to evaluate capital budgeting, capital and financial assets.  I also specialized in global financial markets and how they work and what causes them to fail.  I also studied financial instruments like bonds and derivatives extensively. Because of this I can implement models that the market uses to evaluate risk and price instruments like options, (floating rate)bonds, futures and others.  I am also experienced in using industry means to evaluate decisions which affect capital structure.   </p>
+                          <body>
+
+                              <h1> Loan Calculator </h1>
+                            	<body>
+
+                            		<div id="inputs">
+                            			<div>
+                            				<label>Choose Purchase Price</label>
+                            				$<input id="price" type="text" value="360,000">
+                            			</div>
+                            			<div>
+                            				<label>Property Tax Amount</label>
+                            				$<input id="tax" type="text" value="375">
+                            			</div>
+                            			<div>
+                            				<label>Choose Down Payment</label>
+                            				$<input id="downpay" type="text" value="160,000" >
+                            				<input id="downpercent" type="text" value="44.44" width="3rem">%
+                            			</div>
+                            			<!--<div>
+                            				<label>Choose House Price</label>
+                            				<div class="currencyinput">$<input id="price" type="text" value="100,000"></div>
+                            			</div>-->
+                            			<div>
+                            				<label>Mortgage Term</label>
+                            				<input id="termyears" type="text" value="30" >
+                            				<label>Years</label>
+                            				<input id="termmonths" type="text" value="360" >
+                            				<label>Months</label>
+                            			</div>
+                            			<div>
+                            				<label>Annual Interest</label>
+                            				<input id="interest" type="text" value="5.00">%
+                            			</div>
+                            		</div>
+                            		<div id="output">
+                            			<div>
+                            				<label>Monthly Payment</label>
+                            				<label id="payment">$484.78</label>
+                            			</div>
+                            			<div>
+                            				<label>Total Monthly Payment</label>
+                            				<label id="totalpayment">#</label>
+                            			</div>
+                            			<div>
+                            				<label>Total Loan Payment</label>
+                            				<label id="totalloanpayment">#</label>
+                            			</div>
+                            			<div>
+                            				<label>Total Interest Payment</label>
+                            				<label id="totalinterest">#</label>
+                            			</div>
+                            			<div>
+                            				<button id="btnCalculate" style="height:50px;">Calculate</button>
+                            			</div>
+                            			<div>
+                            				<button id="btnShowGrid" style="height:50px;">Show Amortization Table</button>
+                            			</div>
+                            			<div id="tablecontainer" style="visibility:hidden;">
+                            				<table width ="100%" border="1" id="amortization">
+                            					<tr>
+                            						<th>Payment #</th>
+                            						<th>Opening Bal.</th>
+                            						<th>Interest Paid</th>
+                            						<th>Principal Paid</th>
+                            						<th>Prop. Tax</th>
+                            						<th>Total Pmt</th>
+                            						<th>Closing Bal.</th>
+                            						<tbody></tbody>
+                            			</div>
+                            		</div>
+                        	</body>
                              Date:
                                     <strong>June 2016
                                     </strong>
-                            
+                                        <div>
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+</div>
                         </div>
                     </div>
                 </div>
@@ -478,7 +547,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
-
+    <script src="main.js"> </script>
 </body>
 
 </html>

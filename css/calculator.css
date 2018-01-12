@@ -1,0 +1,5 @@
+div#inputs input {max-width: 10rem;}
+input#downpercent, input#interest {max-width: 5rem;}
+input#termyears, input#termmonths {max-width: 6rem;}
+div#inputs label, div#output label {font-weight: bold; font-family:initial;}
+label#payment, label#totalpayment, label#totalloanpayment, label#totalinterest {color: teal;}
