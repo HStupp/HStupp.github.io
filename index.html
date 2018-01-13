@@ -427,24 +427,30 @@
                             				<label id="totalinterest">#</label>
                             			</div>
                             			<div>
-                            				<button id="btnCalculate" style="height:50px;">Calculate</button>
+                            				<button id="btnCalculate" onclick="calculatePMT()" style="height:50px;">Calculate</button>
                             			</div>
                             			<div>
-                            				<button id="btnShowGrid" style="height:50px;">Show Amortization Table</button>
-                            			</div>
-                            			<div id="tablecontainer" style="visibility:hidden;">
-                            				<table width ="100%" border="1" id="amortization">
-                            					<tr>
-                            						<th>Payment #</th>
-                            						<th>Opening Bal.</th>
-                            						<th>Interest Paid</th>
-                            						<th>Principal Paid</th>
-                            						<th>Prop. Tax</th>
-                            						<th>Total Pmt</th>
-                            						<th>Closing Bal.</th>
-                            						<tbody></tbody>
+                            				<button id="btnShowGrid" style="height:50px;">Populate Amortization Table</button>
                             			</div>
                             		</div>
+                                <div id="tablecontainer">
+                                  <table width ="100%" border="1" id="amortization">
+                                    <thead class="fixedHeader">
+                                    <tr class="header">
+                                      <th>Payment #</th>
+                                      <th>Opening Bal.</th>
+                                      <th>Interest Paid</th>
+                                      <th>Principal Paid</th>
+                                      <th>Prop. Tax</th>
+                                      <th>Total Pmt</th>
+                                      <th>Closing Bal.</th>
+                                    </tr>
+                                  </thead>
+                                      <div class="scroll">
+                                      <tbody id="tbody" class="scrollContent">
+                                      </tbody></div>
+                                    </table>
+                                </div>
                         	</body>
                              Date:
                                     <strong>June 2016

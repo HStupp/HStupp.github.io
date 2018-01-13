@@ -102,8 +102,8 @@ $('#btnCalculate').click(function() {	calculatePMT();	});
 $('#btnShowGrid').click(function() {gridDisplay();});
 function calculatePMT()  {
     clearRows();
-    document.getElementById('btnShowGrid').innerHTML = "Show Amortization Table";
-    document.getElementById('amortization').style.visibility = "hidden";
+    //document.getElementById('btnShowGrid').innerHTML = "Show Amortization Table";
+  //document.getElementById('amortization').style.display = "none";
 		var price = document.getElementById("price").value;
 		price = price.replace(/\//g," ");
 		var downPay = document.getElementById("downpay").value.sanitize();
@@ -130,31 +130,23 @@ function calculatePMT()  {
 
           }
 function clearRows() {
-var elmtTable = document.getElementById('amortization');
+var elmtTable = document.getElementById('tbody');
 var tableRows = elmtTable.getElementsByTagName('tr');
 var rowCount = tableRows.length;
 
-for (var x=rowCount-1; x>0; x--) {
+for (var x=rowCount-1; x>-1; x--) {
    elmtTable.removeChild(tableRows[x]);
 }
 }
 function gridDisplay() {
+  var rowCount = document.getElementById("termmonths").value;
     clearRows();
-    var btnVal = document.getElementById('btnShowGrid').innerHTML;
-  if (btnVal == "Show Amortization Table") {
     calculatePMT();
-    document.getElementById('amortization').style.visibility = "visible";
-    document.getElementById('btnShowGrid').innerHTML = "Hide Amortization Table";
-    var i = 0;
-    for ( i =0; i<document.getElementById("termmonths").value.sanitize().replace(/\//g,"").replace(/,/g,"");i++)
+    for (var i =0; i<rowCount;i++)
     {
       newRow(i);
     }
-  }
-  else {
-      document.getElementById('amortization').style.visibility = "hidden";
-      document.getElementById('btnShowGrid').innerHTML = "Show Amortization Table";
-    }
+
 }
 function newRow(n) {
   var result = [];
@@ -187,7 +179,7 @@ function newRow(n) {
   addRow(result);
 }
 function addRow(array) {
-var table = document.getElementById('amortization');
+var table = document.getElementById('tbody');
 var row = document.createElement('tr');
 for (var i =0; i < array.length; i++) {
   var cell = document.createElement('td');
@@ -217,29 +209,7 @@ $("#balance,#interest,#minpay,#proppay").keyup(function () {
 
 var btnCalculate = document.getElementById("btnCalculate");
 
-
 btnCalculate.addEventListener("click", btnClick);
 
 function btnClick()  {
- var balance = document.getElementById("balance").value.sanitize();
- var interest = document.getElementById("interest").value.sanitize();
- var propPayment = document.getElementById("proppay").value.sanitize();
- var minPayment = document.getElementById("minpay").value.sanitize();
- var lblPropMonths = document.getElementById("propmonths");
- var lblMinMonths = document.getElementById("minmonths");
- var lblPropInterestPaid = document.getElementById("propinterestpay");
- var lblMinInterestPaid = document.getElementById("mininterestpay");
- balance = balance.replace(/\//g," ");
- interest = interest.replace(/\//g," ");
- interest = parseFloat(interest) / 12;
- propPayment = propPayment.replace(/\//g," ");
- minPayment = minPayment.replace(/\//g," ");
- var propMonths = Math.log10( unformatMoney(propPayment)/ ( unformatMoney(propPayment) - unformatMoney(balance) * (interest/100)))/ Math.log10(1 + (interest/100));
- var minMonths = Math.log10( unformatMoney(minPayment)/ ( unformatMoney(minPayment) - unformatMoney(balance) * (interest/100)))/ Math.log10(1 + (interest/100));
- lblPropMonths.innerHTML = formatMoney(propMonths).substring(1);
- lblMinMonths.innerHTML = formatMoney(minMonths).substring(1);
-
- lblPropInterestPaid.innerHTML = formatMoney((propMonths * unformatMoney(propPayment) - unformatMoney(balance)));
- lblMinInterestPaid.innerHTML= formatMoney((minMonths * unformatMoney(minPayment) - unformatMoney(balance)));
-   }
- 
+ calculatePMT();   }
