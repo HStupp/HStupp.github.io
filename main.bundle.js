@@ -161,7 +161,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "div.modal {\n  position: absolute;\n      z-index: 1;\n      background-color: coral;\n      margin-top: 50px;\n}\n\ndiv.category { display: inline-grid;background-color: aliceblue;height: 300px;border: 2px solid lightblue;width: 300px;overflow: auto;margin: 1px;border-radius: 10px;}\n\n.new { color:red;}\n", ""]);
+exports.push([module.i, "div.editmodal {\n  position: absolute;\n      z-index: 1;\n      background-color: coral;\n      margin-top: 50px;\n}\n\ndiv.category { display: inline-grid;background-color: aliceblue;height: 300px;border: 2px solid lightblue;width: 300px;overflow: auto;margin: 1px;border-radius: 10px;}\n\n.new { color:red;}\n\ndiv.category h2 {font-size: 1.5em !important;}\n", ""]);
 
 // exports
 
@@ -174,7 +174,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/budget-category/budget-category.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n<div *ngFor=\"let category of budgetCategories\" class=\"category\">\n  <h2>{{category.name}}\n    <button id=\"btnAdd{{category.name}}\" (click)=\"addClick(category.name)\">Add Item</button>\n    <button id=\"btnAddClose{{category.name}}\" (click)=\"closeAddClick(category.name)\" style=\"display:none;\">Cancel Add Item</button>\n  </h2>\n  <div id=\"modal{{category.name}}\" style=\"display: none;\" class=\"modal\">\n    <p><label> Name: <input #itemName> </label>\n      <label> Category: {{category.name}} </label>\n    </p>\n      <p> <label> Amount: $<input #itemAmount> </label>\n      </p>\n      <p> <label> Category: <input #newCategory placeholder=\"{{category.name}}\" value=\"{{category.name}}\"> </label>\n      <button\n        (click)=\"add(itemName.value, itemAmount.value, newCategory.value);itemName.value='';itemAmount.value='';closeAddClick(category.name);\"\n        >Confirm?\n      </button>\n    </p>\n\n  </div>\n  <app-budget-item [category]=\"category\" [color]=\"category.color\" [monthYear]=\"monthYear\" [isCurrentMonth]=\"isCurrentMonth\"></app-budget-item>\n</div>\n</section>\n<app-budget-chart [monthYear]=\"monthYear\"></app-budget-chart>\n"
+module.exports = "<section>\n<div *ngFor=\"let category of budgetCategories\" class=\"category\">\n  <h2>{{category.name}}\n    <button id=\"btnAdd{{category.name}}\" (click)=\"addClick(category.name)\">Add Item</button>\n    <button id=\"btnAddClose{{category.name}}\" (click)=\"closeAddClick(category.name)\" style=\"display:none;\">Cancel Add Item</button>\n  </h2>\n  <div id=\"modal{{category.name}}\" style=\"display: none;\" class=\"editmodal\">\n    <p><label> Name: <input #itemName> </label>\n      <label> Category: {{category.name}} </label>\n    </p>\n      <p> <label> Amount: $<input #itemAmount> </label>\n      </p>\n      <p> <label> Category: <input #newCategory placeholder=\"{{category.name}}\" value=\"{{category.name}}\"> </label>\n      <button\n        (click)=\"add(itemName.value, itemAmount.value, newCategory.value);itemName.value='';itemAmount.value='';closeAddClick(category.name);\"\n        >Confirm?\n      </button>\n    </p>\n\n  </div>\n  <app-budget-item [category]=\"category\" [color]=\"category.color\" [monthYear]=\"monthYear\" [isCurrentMonth]=\"isCurrentMonth\"></app-budget-item>\n</div>\n</section>\n<app-budget-chart [monthYear]=\"monthYear\"></app-budget-chart>\n"
 
 /***/ }),
 
@@ -272,7 +272,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".hidden {display: none !important;}\n#chartarea, #incomechartarea {position: absolute;top: 70px;background-color: antiquewhite; width:850px;border: 2px solid red; border-radius:10px; overflow:auto; }\ntable {width: 200px;}\ncanvas {width: 500px;}\ndiv.charttable {display:inline-block;float:left; width:25%;}\ndiv.chart {display:inline-block; width: 75%;}\n", ""]);
+exports.push([module.i, ".hidden {display: none !important;}\n#chartarea, #incomechartarea {position: absolute;top: 140px;background-color: antiquewhite; width:850px;border: 2px solid red; border-radius:10px; overflow:auto; left:50px; }\ntable {width: 200px;}\ncanvas {width: 500px;}\ndiv.charttable {display:inline-block;float:left; width:25%;}\ndiv.chart {display:inline-block; width: 75%;}\ndiv.chart h2 {font-size: 1.5em !important;}\n", ""]);
 
 // exports
 
@@ -836,7 +836,9 @@ var MonthPickerComponent = /** @class */ (function () {
         }
     };
     MonthPickerComponent.prototype.incomeChanged = function (income) {
-        localStorage.setItem('totalIncome' + this.monthYear.toString(), (income).toFixed(2));
+        var numIncome = parseFloat(income);
+        localStorage.setItem('totalIncome' + this.monthYear.toString(), numIncome.toFixed(2));
+        this.doRerender();
     };
     MonthPickerComponent.prototype.showBreakdownChart = function (monthYear) {
         document.getElementById('incomechartarea').classList.add('hidden');
