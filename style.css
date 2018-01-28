@@ -1,0 +1,71 @@
+div.header {  position: fixed;  height: 50px;  top 0px;  overflow: hidden;  background-color: 30404D;  left: 0px;  right: 0px;}
+
+div.footer {  position: fixed;  bottom: 0px;  height: 50px;  overflow: hidden;  left: 0px;  right: 0px;  background-color: grey;}
+
+div.body {  position: absolute;  top: 50px;  bottom: 50px;  overflow: auto;  left: 0px;  right: 0px;}
+
+div.aboutcontent {  align-items: center;  text-align: center;  background-color: 30404D;}
+
+div.aboutcontent img {  border-radius: 250px;  padding-top: 10px;  padding-bottom: 10px;	padding-right:10px;	padding-left:10px;}
+
+div.aboutcontent div.name {  color: d3cab2;  font-weight: bold;  font-family: sans-serif;  padding-top: 10px;  padding-bottom: 10px;  font-size: 3em;}
+
+div.aboutcontent div.subheading {  color: d3cab2;  font-weight: bold;  font-family: serif;  padding-top: 10px;  padding-bottom: 10px;  font-size: 1.8em;}
+
+div.portfolio {  background-color: B0A78F;}
+
+div.portfolio img {  width: 300px;  height: 300px;}
+
+div.portfolio img.jquery {  width: 160px;  height: 160px;  padding-bottom: 60px;  padding-left: 80px;  padding-right: 80px;}
+
+div.portfolio img.linkedin {  width: 160px;  height: 160px;  padding-bottom: 60px;  padding-right: 80px;  padding-left: 80px;}
+
+div.portfolio img.github {  width: 160px;  height: 160px;  padding-bottom: 60px;  padding-left: 60px;  padding-right: 80px;}
+
+div.portfolio div.portfolioitem {  width: 300px !important;  height: 300px !important;  padding: 20px;  display: inline;  position: relative;}
+
+label.title {  position: absolute;  left: 80px;  margin-top: 50px;  font-weight: bold;  color: 30404D;  bottom: 280px;}
+
+div.about {  background-color: 7987a0;  padding: 20px;	color:30404D;}
+
+div.about h1 {  text-align: center;	color:30404D;}
+
+div#angular {  background-color: 6094cb;	color:30404D; position:relative; padding-top:5px;}
+
+div#angular h1 {  text-align: center;	color:30404D;}
+
+div#inputs input {  max-width: 10rem;}
+
+input#downpercent, input#interest {  max-width: 5rem;}
+
+input#termyears, input#termmonths {  max-width: 6rem;}
+
+div#inputs label, div#output label {  font-weight: bold;  font-family: initial;}
+
+label#payment, label#totalpayment, label#totalloanpayment, label#totalinterest {  color: teal;}
+
+thead.fixedHeader tr {  position: relative;}
+
+div#calculator {  background-color: gainsboro;	color:30404D; padding-top:5px;}
+
+div#calculator h1 {  text-align: center;	color:30404D;}
+
+/* calculator css styles */
+
+div#tablecontainer {  width: fit-content;  width: -moz-min-content;}
+
+html>body thead.fixedHeader tr {  display: block}
+
+thead.fixedHeader th {  background: #C96;  border-left: 1px solid #EB8;  border-right: 1px solid #B74;  border-top: 1px solid #EB8;  font-weight: normal;  padding: 4px 3px;  text-align: left}
+
+tbody.scrollContent td, tbody.scrollContent tr.normalRow td {  background: #FFF;  border-bottom: none;  border-left: none;  border-right: 1px solid #CCC;  border-top: 1px solid #DDD;  padding: 2px 3px 3px 4px}
+
+tbody.scrollContent tr.alternateRow td {  background: #EEE;  border-bottom: none;  border-left: none;  border-right: 1px solid #CCC;  border-top: 1px solid #DDD;  padding: 2px 3px 3px 4px}
+
+html>body tbody.scrollContent {  display: block;  height: 400px;  overflow: auto;  width: 100%}
+
+td, th {  min-width: 100px;  max-width: 100px;}
+
+div.tablecontainer {  height: 400px;  overflow: auto}
+
+html>body div.tableContainer {  overflow: hidden;}

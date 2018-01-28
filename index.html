@@ -1,492 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Henry Stupp</title>
-
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/calculator.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/freelancer.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+  <link rel='stylesheet' type='text/css' href='style.css'>
+  <script src='calculator.js' type='text/javascript'></script>
 </head>
 
-<body id="page-top" class="index">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#page-top">Web, BI Solutions & More</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="img/profile.jpg" alt="">
-                    <div class="intro-text">
-                        <span class="name">Henry Traylor Stupp</span>
-                        <hr class="star-light">
-                        <span class="skills">Delivering web and enterprise level solutions</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/HTML-CSS3.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/js.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/Programming.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/BI.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/Cloud.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/Finance.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="success" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About Me</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>I am a freelance developer with expertise in creating responsive designs with CSS, interactive features with JavaScript, data driven solutions using SQL and much more!</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>I am Westminster based problem solver and mountain climber.  Hire me to tackle yours! </p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <img src="img/14erSunrise.jpg"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>Westminster, Colorado<br></p>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="https://www.linkedin.com/in/henry-stupp" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll visible-xs visible-sm">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
+<body>
+  <div class='header'>
+    HEADERHEADERHEADER
+  </div>
+  <div class='body'>
+    <div class='aboutcontent'>
+      <div class="name">Henry Traylor Stupp</div>
+      <img src="profile.jpg">
+      <div class='subheading'> Delivering web and enterprise level solutions </div>
     </div>
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Modern Web Development</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/web design.png" class="img-responsive img-centered" alt="">
-                            <p>I am proficient at using HTML5 and CSS3 to create a modern, elegant and responsive web design that will work on any size screen.  I achieve this in an efficient way by designing anything with the smallest possible screen first.  Making a design scale up from a stable mobile version is a lot easier than doing the inverse.  The other way I achieve efficiency is by using libraries where I can.  I started my career using Foundation, this project got me familiar with Bootstrap so I am comfortable using either!</p>
-
-
-                                Date:
-                                    <strong>June 2016
-                                    </strong>
-
-
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class='portfolio'>
+      <div class='portfolioitem'><a href="#angular"><img src='ng.png'></a><label class='title'>Angular Budgeting App</label></div>
+      <div class='portfolioitem'><a href="#calculator"><img class='jquery' src='jquery.png'></a><label style='left:30px;' class='title'>Loan Calculator/Amortization Table</label></div>
+      <div class='portfolioitem'><a href="https://linkedin.com/in/henry-stupp"><img class='linkedin' src='in.png'> </a> <label style='left:95px;' class='title'>LinkedIn Profile</label></div>
+      <div class='portfolioitem'><a href='https://github.com/hstupp'><img class='github' src='gh.png'> </a><label style='left:85px;' class='title'>GitHub Account</label></div>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="">
-                <div class="row">
-                    <div class="">
-                        <div class="">
-                          <body>
-  <app-root></app-root>
-<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
-                          <!--
-                            <h2>JavaScript</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/JavaScript.png" class="img-responsive img-centered" alt="">
-                            <p>  I like using jQuery and Angular to create modern and responsive web sites.  I am familiar with SASS or SCSS to make my life easier and experiences more rich.  I prefer to use fullstack JavaScript via Node(Express)JS.  I am also proficient in PHP and Python for server-side tasks.  </p>
-                            <p> Angular example coming soon! </p>
-
-                               Date:
-                                    <strong>June 2016
-                                    </strong>
-
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class='about'>
+      <h1> About Me </h1>
+      <p>Thanks for visiting my page!  I started working with software around 13 when I became obsessed with modding popular video game WarCraft III. Since then I've picked up a few skills mostly through self-teaching.</p>
+      <p>I am a fullstack JavaScript and BI developer.  I've created extensive solutions using Angular2+ with a node.js backend, deployed and maintained services to AWS instances.  As a BI developer I've maintained, improved and developed solutions in the Microsoft stack using SSRS, SSIS and SQL server.  I've deployed and maintained these environments on Azure.  I've also spent time debugging and diagnosing SSAS instances to support overnight SLAs. </p>
+      <p>I went to school for Finance (CU Boulder) and received a 4.0 GPA for my bachelor's in that field.  I am an accomplished, self-taught learner and teacher.  I have been a successful tutor for high level Finance classes and have a strong grasp of financial modeling/analysis.</p>
+      <p>I am confident that I can learn new ideas, infrastructures, systems faster than the next person.  I revel in the process of doing so.  I am eager for your difficult challenges, it helps me learn new tools, and new ways of accomplishing tasks.</p>
+      <p>I am also an accomplished Excel guru and am very effective in VisualBasic and VBA. On top of this I also have significant experience in ASP.NET/C#. Hire me to do complex spreadsheets or financial models/analysis for your company.</p>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Programming Knowledge	</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/program.png" class="img-responsive img-centered" alt="">
-                            <p> I started programming at a very young age but did not know it! At 13 I played a game called WarCraft III, I became bored with the gameplay quickly, but discovered the world editor and its programming language, JASS.  I set out turning simple Orcs with Axes into a complicated modern warfare scenario.  Here I learned the principles of Object Oriented.  Later when I was exposed to real world applications, everything came very easily.  Since then I have become very good at writing C#, Python, VBA, VB and have worked in Java. </p>
-
-                                Date:
-                                    <strong>June 2016
-
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="angular">
+      <h1> Angular Budgeting App </h1>
+      <app-root></app-root>
+  <script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Business Intelligence</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/dashboard.png" class="img-responsive img-centered" alt="">
-                            <p> I have worked in BI in several jobs and in business school. I have the technical expertise to implement an ETL, a reporting environment and even have experience supporting such processes with exception based and non-exception based techniques.  I am familiar with all features up to MSSQL Server 2012 and query optimization therein.  I also have experience with rudimentary means of analytics, predictive and descriptive.  My greatest potential in this field is being someone who can talk with the B.A.s, the finance people and the tech people who are writing the code and configuring the environments and use each one of their languages. You could call me a tech savy businessperson or a business savy techperson, not sure which. </p>
-                            Date:
-                                    <strong>June 2016
-                                    </strong>
+    <div id='calculator'>
+      <h1> Loan Calculator </h1>
+      <body>
 
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="inputs">
+          <div>
+            <label>Choose Purchase Price</label>
+            $<input id="price" type="text" value="360,000">
+          </div>
+          <div>
+            <label>Property Tax Amount</label>
+            $<input id="tax" type="text" value="375">
+          </div>
+          <div>
+            <label>Choose Down Payment</label>
+            $<input id="downpay" type="text" value="160,000" >
+            <input id="downpercent" type="text" value="44.44" width="3rem">%
+          </div>
+          <!--<div>
+            <label>Choose House Price</label>
+            <div class="currencyinput">$<input id="price" type="text" value="100,000"></div>
+          </div>-->
+          <div>
+            <label>Mortgage Term</label>
+            <input id="termyears" type="text" value="30" >
+            <label>Years</label>
+            <input id="termmonths" type="text" value="360" >
+            <label>Months</label>
+          </div>
+          <div>
+            <label>Annual Interest</label>
+            <input id="interest" type="text" value="5.00">%
+          </div>
         </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Cloud Experience</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/azurevm.png" class="img-responsive img-centered" alt="">
-                            <p>  I have experience delivering cloud based MSSQL BI solutions on Azure Virtual Machines.  I can use powershell, and azure automation to make these machines automate their work to save on compute cost.  I know how to navigate the limitations in Azure to deliver a full stack with database, web applications, reporting and processing layers with consideration to cost and ease of maintenance.  I have also developed and supported fullstack solutions in AWS and prefer this for cost reasons and simplicity over Azure.</p>
-                            Date:
-                                    <strong>June 2016
-                                    </strong>
-
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="output">
+          <div>
+            <label>Monthly Payment</label>
+            <label id="payment">$484.78</label>
+          </div>
+          <div style="display:none">
+            <label>Total Monthly Payment</label>
+            <label id="totalpayment">#</label>
+          </div>
+          <div>
+            <label>Total Loan Payment</label>
+            <label id="totalloanpayment">#</label>
+          </div>
+          <div>
+            <label>Total Interest Payment</label>
+            <label id="totalinterest">#</label>
+          </div>
+          <div>
+            <button id="btnCalculate" onclick="calculatePMT()" style="height:50px;">Calculate</button>
+          </div>
+          <div>
+            <button id="btnShowGrid" style="height:50px;" onclick="gridDisplay();">Populate Amortization Table</button>
+          </div>
         </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                          <body>
-
-                              <h1> Loan Calculator </h1>
-                            	<body>
-
-                            		<div id="inputs">
-                            			<div>
-                            				<label>Choose Purchase Price</label>
-                            				$<input id="price" type="text" value="360,000">
-                            			</div>
-                            			<div>
-                            				<label>Property Tax Amount</label>
-                            				$<input id="tax" type="text" value="375">
-                            			</div>
-                            			<div>
-                            				<label>Choose Down Payment</label>
-                            				$<input id="downpay" type="text" value="160,000" >
-                            				<input id="downpercent" type="text" value="44.44" width="3rem">%
-                            			</div>
-                            			<!--<div>
-                            				<label>Choose House Price</label>
-                            				<div class="currencyinput">$<input id="price" type="text" value="100,000"></div>
-                            			</div>-->
-                            			<div>
-                            				<label>Mortgage Term</label>
-                            				<input id="termyears" type="text" value="30" >
-                            				<label>Years</label>
-                            				<input id="termmonths" type="text" value="360" >
-                            				<label>Months</label>
-                            			</div>
-                            			<div>
-                            				<label>Annual Interest</label>
-                            				<input id="interest" type="text" value="5.00">%
-                            			</div>
-                            		</div>
-                            		<div id="output">
-                            			<div>
-                            				<label>Monthly Payment</label>
-                            				<label id="payment">$484.78</label>
-                            			</div>
-                            			<div style="display:none">
-                            				<label>Total Monthly Payment</label>
-                            				<label id="totalpayment">#</label>
-                            			</div>
-                            			<div>
-                            				<label>Total Loan Payment</label>
-                            				<label id="totalloanpayment">#</label>
-                            			</div>
-                            			<div>
-                            				<label>Total Interest Payment</label>
-                            				<label id="totalinterest">#</label>
-                            			</div>
-                            			<div>
-                            				<button id="btnCalculate" onclick="calculatePMT()" style="height:50px;">Calculate</button>
-                            			</div>
-                            			<div>
-                            				<button id="btnShowGrid" style="height:50px;">Populate Amortization Table</button>
-                            			</div>
-                            		</div>
-                                <div id="tablecontainer">
-                                  <table width ="100%" border="1" id="amortization">
-                                    <thead class="fixedHeader">
-                                    <tr class="header">
-                                      <th>Payment #</th>
-                                      <th>Opening Bal.</th>
-                                      <th>Interest Paid</th>
-                                      <th>Principal Paid</th>
-                                      <th>Prop. Tax</th>
-                                      <th>Total Pmt</th>
-                                      <th>Closing Bal.</th>
-                                    </tr>
-                                  </thead>
-                                      <div class="scroll">
-                                      <tbody id="tbody" class="scrollContent">
-                                      </tbody></div>
-                                    </table>
-                                </div>
-                        	</body>
-                             Date:
-                                    <strong>June 2016
-                                    </strong>
-                                        <div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="tablecontainer">
+          <table width ="100%" border="1" id="amortization">
+            <thead class="fixedHeader">
+            <tr class="header">
+              <th>Payment #</th>
+              <th>Opening Bal.</th>
+              <th>Interest Paid</th>
+              <th>Principal Paid</th>
+              <th>Prop. Tax</th>
+              <th>Total Pmt</th>
+              <th>Closing Bal.</th>
+            </tr>
+          </thead>
+              <div class="scroll">
+              <tbody id="tbody" class="scrollContent">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody></div>
+            </table>
         </div>
+  </body>
     </div>
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/classie.js"></script>
-    <script src="js/cbpAnimatedHeader.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="js/freelancer.js"></script>
-    <script src="main.js"> </script>
+  </div>
+  <div class='footer'>
+    footer footer footer
+  </div>
 </body>
-
-</html>
