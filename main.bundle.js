@@ -161,7 +161,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "div.editmodal {\n  position: absolute;\n      z-index: 1;\n      background-color: coral;\n      margin-top: 50px;\n}\n\ndiv.category { display: inline-grid;background-color: aliceblue;height: 300px;border: 2px solid lightblue;width: 300px;overflow: auto;margin: 1px;border-radius: 10px;}\n\n.new { color:red;}\n\ndiv.category h2 {font-size: 1.5em !important;}\n", ""]);
+exports.push([module.i, "div.editmodal { position: absolute; z-index: 1; background-color: coral; margin-top: 50px;}\n\ndiv.category { display: inline-grid;background-color: aliceblue;height: 300px;border: 2px solid lightblue;width: 300px;overflow: auto;margin: 1px;border-radius: 10px;}\n\n.new { color:red;}\n\ndiv.category h2 {font-size: 1.5em !important;}\n\n.hidden {display:none !important;}\n\ndiv.addModal {top: 25px; left:25px; right:25px; position: fixed; height: 100%; background-color: lightgray; width: calc(100% - 50px); z-index: 1;}\n\nspan.close {float:right; font-size:3em; font-family: sans-serif; padding-right: .5em; padding-top: .25em; padding-left: .5em; padding-bottom: .25em; cursor: pointer; background-color: grey;}\n", ""]);
 
 // exports
 
@@ -174,7 +174,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/budget-category/budget-category.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n<div *ngFor=\"let category of budgetCategories\" class=\"category\">\n  <h2>{{category.name}}\n    <button id=\"btnAdd{{category.name}}\" (click)=\"addClick(category.name)\">Add Item</button>\n    <button id=\"btnAddClose{{category.name}}\" (click)=\"closeAddClick(category.name)\" style=\"display:none;\">Cancel Add Item</button>\n  </h2>\n  <div id=\"modal{{category.name}}\" style=\"display: none;\" class=\"editmodal\">\n    <p><label> Name: <input #itemName> </label>\n      <label> Category: {{category.name}} </label>\n    </p>\n      <p> <label> Amount: $<input #itemAmount> </label>\n      </p>\n      <p> <label> Category: <input #newCategory placeholder=\"{{category.name}}\" value=\"{{category.name}}\"> </label>\n      <button\n        (click)=\"add(itemName.value, itemAmount.value, newCategory.value);itemName.value='';itemAmount.value='';closeAddClick(category.name);\"\n        >Confirm?\n      </button>\n    </p>\n\n  </div>\n  <app-budget-item [category]=\"category\" [color]=\"category.color\" [monthYear]=\"monthYear\" [isCurrentMonth]=\"isCurrentMonth\"></app-budget-item>\n</div>\n</section>\n<app-budget-chart [monthYear]=\"monthYear\"></app-budget-chart>\n"
+module.exports = "<section *ngIf=\"!rerender\">\n\n  <div class='addModal hidden' id='addmodal'>\n    <span class='close' (click)='closeAddClick();'>X</span>\n      <p><label> Name: <input #itemName> </label>\n        <label> Category: {{selectedCategory.name}} </label>\n      </p>\n        <p> <label> Amount: $<input #itemAmount> </label>\n        </p>\n        <p> <label> Category: <input #newCategory placeholder=\"{{selectedCategory.name}}\" value=\"{{selectedCategory.name}}\"> </label>\n        <button\n          (click)=\"add(itemName.value, itemAmount.value, newCategory.value);itemName.value='';itemAmount.value='';\"\n          >Confirm?\n        </button>\n      </p>\n</div>\n\n<div *ngFor=\"let category of budgetCategories\" class=\"category\">\n  <h2>{{category.name}}\n    <button id=\"btnAdd{{category.name}}\" (click)=\"addClick(category.name)\" class='addItem'>Add Item</button>\n  </h2>\n  <app-budget-item [category]=\"category\" [color]=\"category.color\" [monthYear]=\"monthYear\" [isCurrentMonth]=\"isCurrentMonth\"></app-budget-item>\n</div>\n</section>\n<app-budget-chart [monthYear]=\"monthYear\" [budgetItems]='budgetItems'></app-budget-chart>\n"
 
 /***/ }),
 
@@ -199,9 +199,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var BudgetCategoryComponent = /** @class */ (function () {
-    function BudgetCategoryComponent(budgetItemService) {
+    function BudgetCategoryComponent(budgetItemService, cdRef) {
         this.budgetItemService = budgetItemService;
+        this.cdRef = cdRef;
+        this.selectedCategory = { id: 2, name: 'Utilities', priority: 2, color: 'red' };
         this.budgetCategories = __WEBPACK_IMPORTED_MODULE_1__mock_budget_categories__["a" /* BUDGETCATEGORIES */];
+        this.rerender = false;
+        this.newItem = { id: 0, name: '', amount: 0, category: '' };
     }
     BudgetCategoryComponent.prototype.ngOnInit = function () {
         var dt = new Date();
@@ -210,52 +214,76 @@ var BudgetCategoryComponent = /** @class */ (function () {
             mm = '0' + mm.toString();
         }
         var monthYear = (dt.getFullYear().toString() + mm);
-        if (this.monthYear == Number.parseInt(monthYear)) {
+        if (this.monthYear === Number.parseInt(monthYear)) {
             this.isCurrentMonth = true;
         }
         else {
             this.isCurrentMonth = false;
         }
     };
-    // todo migrate to service
+    BudgetCategoryComponent.prototype.doRerender = function () {
+        this.rerender = true;
+        this.cdRef.detectChanges();
+        this.rerender = false;
+    };
+    // todo migrate localstorage to service
     BudgetCategoryComponent.prototype.add = function (name, amount, category) {
-        var oldBudget = JSON.parse(localStorage.getItem('budgetItems'));
-        var newItem = { 'name': '', 'amount': '', 'category': '', 'id': '' };
-        newItem.name = name;
-        newItem.amount = amount;
-        newItem.category = category;
-        newItem.id = oldBudget.length;
-        oldBudget.push(newItem);
-        localStorage.setItem('budgetItems', JSON.stringify(oldBudget));
-        window.location.reload();
+        console.log(this.newItem);
+        var oldBudget = this.budgetItems;
+        // let oldBudget = JSON.parse(localStorage.getItem('budgetItems' + this.monthYear.toString()));
+        //  {'name': '', 'amount': '', 'category': '', 'id': ''};
+        this.newItem.name = name;
+        this.newItem.amount = amount;
+        this.newItem.category = category;
+        if (!oldBudget) {
+            console.log('if');
+            this.newItem.id = 1;
+            oldBudget = [];
+        }
+        else {
+            console.log('else');
+            this.newItem.id = oldBudget.length;
+        }
+        console.log(this.newItem);
+        oldBudget.push(this.newItem);
+        localStorage.setItem('budgetItems' + this.monthYear.toString(), JSON.stringify(oldBudget));
+        oldBudget.push(this.newItem);
+        this.budgetItems = oldBudget;
+        this.doRerender();
     };
     BudgetCategoryComponent.prototype.addClick = function (category) {
-        var modal = document.getElementById('modal' + category.toString());
-        var btn = document.getElementById('btnAdd' + category.toString());
-        var btnClose = document.getElementById('btnAddClose' + category.toString());
-        btnClose.style.display = 'inline-block';
-        btn.style.display = 'none';
-        modal.style.display = 'inline-block';
+        document.getElementById('addmodal').classList.remove('hidden');
+        this.selectedCategory.name = category;
     };
     BudgetCategoryComponent.prototype.closeAddClick = function (category) {
-        var modal = document.getElementById('modal' + category.toString());
-        var btnClose = document.getElementById('btnAddClose' + category.toString());
-        var btn = document.getElementById('btnAdd' + category.toString());
-        btnClose.style.display = 'none';
-        modal.style.display = 'none';
-        btn.style.display = 'inline-block';
+        //  console.log(document.getElementById('addmodal'));
+        document.getElementById('addmodal').classList.add('hidden');
+    };
+    BudgetCategoryComponent.prototype.hideElements = function (elems) {
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.add('hidden');
+        }
+    };
+    BudgetCategoryComponent.prototype.showElements = function (elems) {
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('hidden');
+        }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Number)
     ], BudgetCategoryComponent.prototype, "monthYear", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array)
+    ], BudgetCategoryComponent.prototype, "budgetItems", void 0);
     BudgetCategoryComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-budget-category',
             template: __webpack_require__("../../../../../src/app/budget-category/budget-category.component.html"),
             styles: [__webpack_require__("../../../../../src/app/budget-category/budget-category.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__budget_item_service__["a" /* BudgetItemService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__budget_item_service__["a" /* BudgetItemService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]])
     ], BudgetCategoryComponent);
     return BudgetCategoryComponent;
 }());
@@ -310,7 +338,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var BudgetChartComponent = /** @class */ (function () {
     function BudgetChartComponent() {
         this.categoryList = __WEBPACK_IMPORTED_MODULE_1__mock_budget_categories__["a" /* BUDGETCATEGORIES */];
-        this.budgetItems = JSON.parse(localStorage.getItem('budgetItems'));
         // Pie
         this.strCategories = [];
         this.strIncomeCategories = [];
@@ -373,6 +400,10 @@ var BudgetChartComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Number)
     ], BudgetChartComponent.prototype, "monthYear", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array)
+    ], BudgetChartComponent.prototype, "budgetItems", void 0);
     BudgetChartComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-budget-chart',
@@ -413,12 +444,7 @@ var BudgetItemService = /** @class */ (function () {
         // localStorage.clear();
         var budgetItems = [];
         var localBudgetItems;
-        if (isCurrentMonth) {
-            localBudgetItems = JSON.parse(localStorage.getItem('budgetItems'));
-        }
-        else {
-            localBudgetItems = JSON.parse(localStorage.getItem(monthYear.toString() + 'budget'));
-        }
+        localBudgetItems = JSON.parse(localStorage.getItem('budgetItems' + monthYear.toString()));
         var result = [];
         // if no budget items for current month use mock-db
         if (!localBudgetItems && isCurrentMonth) {
@@ -430,7 +456,7 @@ var BudgetItemService = /** @class */ (function () {
             budgetItems = localBudgetItems;
         }
         if (isCurrentMonth) {
-            localStorage.setItem('budgetItems', JSON.stringify(budgetItems));
+            localStorage.setItem('budgetItems' + monthYear.toString(), JSON.stringify(budgetItems));
         }
         else {
             if (budgetItems) {
@@ -496,7 +522,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/budget-item/budget-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"heroes\" id=\"ul{{category.name}}\">\n  <li *ngFor=\"let item of budgetItems\">\n    <div id=\"li{{item.id}}\">{{item.id}}\n    <span class=\"badge\">{{item.name}}</span>\n    <span> &nbsp; ${{item.amount}}\n    <button (click)=\"onSelect(item)\" [class.seleted]=\"item === selectedHero\">Edit</button>\n    <button (click)=\"deleteSelect(item)\">X</button>\n    </span>\n    </div>\n  </li>\n</ul>\n<app-item-detail [item]=\"selectedItem\"> </app-item-detail>\n"
+module.exports = "<ul class=\"heroes\" id=\"ul{{category.name}}\">\n  <li *ngFor=\"let item of budgetItems\">\n    <div id=\"li{{item.id}}\">{{item.id}}\n    <span class=\"badge\">{{item.name}}</span>\n    <span> &nbsp; ${{item.amount}}\n    <button (click)=\"onSelect(item)\" [class.seleted]=\"item === selectedHero\">Edit</button>\n    <button (click)=\"deleteSelect(item)\">X</button>\n    </span>\n    </div>\n  </li>\n</ul>\n<app-item-detail [item]=\"selectedItem\" [monthYear]='monthYear'> </app-item-detail>\n"
 
 /***/ }),
 
@@ -549,14 +575,14 @@ var BudgetItemComponent = /** @class */ (function () {
         }
     };
     BudgetItemComponent.prototype.deleteItem = function (id) {
-        var oldBudget = JSON.parse(localStorage.getItem('budgetItems'));
+        var oldBudget = JSON.parse(localStorage.getItem('budgetItems' + this.monthYear.toString()));
         var result = [];
         for (var i = 0; i < oldBudget.length; i++) {
             if (oldBudget[i].id !== id) {
                 result.push(oldBudget[i]);
             }
         }
-        localStorage.setItem('budgetItems', JSON.stringify(result));
+        localStorage.setItem('budgetItems' + this.monthYear.toString(), JSON.stringify(result));
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -610,7 +636,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/item-detail/item-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"item\" id=\"edit{{item.category}}\" class=\"edit\">\n  <h2>{{ item.name | uppercase }} Details\n    <button class=\"close\" (click)=\"closeClick(item.category);\">X</button>\n  </h2>\n  <div><label>amount: $<input #itemAmount placeholder=\"{{item.amount}}\" value=\"{{item.amount}}\"> </label> </div>\n  <div>\n    <label>name:\n    <input #itemName value=\"{{item.name}}\" placeholder=\"{{item.name}}\">\n  </label>\n  <label>category:\n    <input #itemCategory value=\"{{item.category}}\" placeholder=\"{{item.category}}\">\n  </label>\n  </div>\n  <p> <button (click)=\"saveClick(item.id, itemName.value, itemCategory.value, itemAmount.value)\">Save?</button></p>\n</div>\n"
+module.exports = "<div *ngIf=\"item && !rerender\" id=\"edit{{item.category}}\" class=\"edit\">\n  <h2>{{ item.name | uppercase }} Details\n    <button class=\"close\" (click)=\"closeClick(item.category);\">X</button>\n  </h2>\n  <div><label>amount: $<input #itemAmount placeholder=\"{{item.amount}}\" value=\"{{item.amount}}\"> </label> </div>\n  <div>\n    <label>name:\n    <input #itemName value=\"{{item.name}}\" placeholder=\"{{item.name}}\">\n  </label>\n  <label>category:\n    <input #itemCategory value=\"{{item.category}}\" placeholder=\"{{item.category}}\">\n  </label>\n  </div>\n  <p> <button (click)=\"saveClick(item.id, itemName.value, itemCategory.value, itemAmount.value)\">Save?</button></p>\n</div>\n"
 
 /***/ }),
 
@@ -633,14 +659,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ItemDetailComponent = /** @class */ (function () {
-    function ItemDetailComponent() {
+    function ItemDetailComponent(cdRef) {
+        this.cdRef = cdRef;
+        this.rerender = false;
     }
+    ItemDetailComponent.prototype.doRerender = function () {
+        this.rerender = true;
+        this.cdRef.detectChanges();
+        this.rerender = false;
+    };
     ItemDetailComponent.prototype.ngOnInit = function () {
     };
     ItemDetailComponent.prototype.saveClick = function (id, name, category, amount) {
         if (confirm('Confirm Editing "' + name + '"?')) {
             this.saveChange(id, name, category, amount);
-            window.location.reload();
+            this.doRerender();
         }
     };
     // should be in service
@@ -660,7 +693,7 @@ var ItemDetailComponent = /** @class */ (function () {
                 result.push(newItem);
             }
         }
-        localStorage.setItem('budgetItems', JSON.stringify(result));
+        localStorage.setItem('budgetItems' + this.monthYear.toString(), JSON.stringify(result));
     };
     ItemDetailComponent.prototype.closeClick = function (category) {
         var categoryDiv = document.getElementById('edit' + category);
@@ -672,13 +705,17 @@ var ItemDetailComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__budget_item__["a" /* BudgetItem */])
     ], ItemDetailComponent.prototype, "item", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Number)
+    ], ItemDetailComponent.prototype, "monthYear", void 0);
     ItemDetailComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-item-detail',
             template: __webpack_require__("../../../../../src/app/item-detail/item-detail.component.html"),
             styles: [__webpack_require__("../../../../../src/app/item-detail/item-detail.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]])
     ], ItemDetailComponent);
     return ItemDetailComponent;
 }());
@@ -778,7 +815,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/month-picker/month-picker.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-container *ngIf=\"!rerender\">\n<div id=\"monthPicker\">\n<strong> Month Picker   </strong>\n<input style=\"width:55px;\"[(ngModel)]=\"monthYear\" #monthPicker value=\"\" placeholder=\"YYYYMM\" (input)=\"monthYearClick(monthPicker.value);\">\n<!-- <button (click)=\"monthYearClick(monthPicker.value);\"> View Month </button> -->\n  <button (click)=\"showBreakdownChart(monthPicker.value);\">Expense Chart </button>\n  <strong> Monthly Income </strong>\n  $<input style=\"width: 80px;\" [(ngModel)]=\"totalIncome\" #income value=\"\">\n  <button (click)=\"incomeChanged(income.value)\">Save</button>\n  <button (click)=\"showIncomeChart(monthPicker.value);\">Expense/Income Chart</button>\n</div>\n<app-budget-category [monthYear]=\"monthYear\"></app-budget-category>\n</ng-container>\n"
+module.exports = "<ng-container *ngIf=\"!rerender\">\n<div id=\"monthPicker\">\n<strong> Month Picker   </strong>\n<input style=\"width:55px;\"[(ngModel)]=\"monthYear\" #monthPicker placeholder=\"YYYYMM\" (input)=\"monthYearClick(monthPicker.value);\">\n<!-- <button (click)=\"monthYearClick(monthPicker.value);\"> View Month </button> -->\n  <button (click)=\"showBreakdownChart(monthPicker.value);\">Expense Chart </button>\n  <strong> Monthly Income </strong>\n  $<input style=\"width: 80px;\" [(ngModel)]=\"totalIncome\" #income value=\"\">\n  <button (click)=\"incomeChanged(income.value)\">Save</button>\n  <button (click)=\"showIncomeChart(monthPicker.value);\">Expense/Income Chart</button>\n</div>\n<app-budget-category [monthYear]=\"monthYear\" [budgetItems]='budgetItems'></app-budget-category>\n</ng-container>\n"
 
 /***/ }),
 
@@ -827,6 +864,7 @@ var MonthPickerComponent = /** @class */ (function () {
         else {
             this.totalIncome = income;
         }
+        this.budgetItems = JSON.parse(localStorage.getItem('budgetItems' + this.monthYear.toString()));
     };
     MonthPickerComponent.prototype.monthYearClick = function (monthYear) {
         console.log(monthYear);
